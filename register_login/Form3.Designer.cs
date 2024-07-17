@@ -79,7 +79,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(339, 145);
+            label3.Location = new Point(124, 153);
             label3.Name = "label3";
             label3.Size = new Size(29, 15);
             label3.TabIndex = 2;
@@ -147,6 +147,7 @@
             editbtn.TabStop = false;
             editbtn.Text = "edit";
             editbtn.UseVisualStyleBackColor = true;
+            editbtn.Click += editbtn_Click;
             // 
             // textBox1
             // 
@@ -166,7 +167,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(339, 45);
+            label4.Location = new Point(339, 91);
             label4.Name = "label4";
             label4.Size = new Size(27, 15);
             label4.TabIndex = 11;
@@ -175,7 +176,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(339, 89);
+            label5.Location = new Point(339, 45);
             label5.Name = "label5";
             label5.Size = new Size(29, 15);
             label5.TabIndex = 12;

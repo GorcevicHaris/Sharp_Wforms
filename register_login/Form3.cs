@@ -88,10 +88,52 @@ namespace register_login
                     }
                 }
                 else { MessageBox.Show("Select user which u want to delete"); }
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void editbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    string userName = textBox1.Text;
+                    string password = textBox2.Text;
+                    int userId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+
+                    string connection = "server=localhost;database=user;username=root;password=;";
+                    using (MySqlConnection mySqlConnection = new MySqlConnection(connection))
+                    {
+                        mySqlConnection.Open();
+                        string sql = "UPDATE man SET userName = @userName, password = @password WHERE id = @userID";
+                        using (MySqlCommand db = new MySqlCommand(sql, mySqlConnection))
+                        {
+                            db.Parameters.AddWithValue("@userName", userName);
+                            db.Parameters.AddWithValue("@password", password);
+                            db.Parameters.AddWithValue("@userID", userId);
+
+                            db.ExecuteNonQuery();
+                        }
+                    }
+
+                    LoadData();
+                    MessageBox.Show("User is successfully updated");
+                }
+                else
+                {
+                    MessageBox.Show("Select user which you want to update");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }
