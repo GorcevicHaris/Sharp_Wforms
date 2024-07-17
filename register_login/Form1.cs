@@ -39,7 +39,7 @@ namespace register_login
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message.ToString());
+                    MessageBox.Show(ex.Message.ToString()+ "dal");
                 }
             }
         }
