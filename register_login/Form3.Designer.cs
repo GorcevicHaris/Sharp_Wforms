@@ -94,7 +94,7 @@
             dataGridView1.Location = new Point(-3, 180);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(804, 214);
+            dataGridView1.Size = new Size(804, 289);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -136,6 +136,7 @@
             deletebtn.TabIndex = 7;
             deletebtn.Text = "delete";
             deletebtn.UseVisualStyleBackColor = true;
+            deletebtn.Click += deletebtn_Click;
             // 
             // editbtn
             // 
@@ -199,7 +200,6 @@
             Controls.Add(label1);
             Name = "Form3";
             Text = "Form3";
-            Load += Form3_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

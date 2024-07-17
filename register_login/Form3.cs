@@ -17,11 +17,11 @@ namespace register_login
         {
             string connection = "server=localhost;database=user;username=root;password=;";
 
-            using (MySqlConnection conn = new MySqlConnection(connection))
+            MySqlConnection conn = new MySqlConnection(connection);
             {
                 conn.Open();
-                string sql = "SELECT userName, password FROM man";
-                using (MySqlCommand db = new MySqlCommand(sql, conn))
+                string sql = "SELECT * FROM man"; // Include the 'id' column
+                MySqlCommand db = new MySqlCommand(sql, conn);
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(db);
                     DataTable dataTable = new DataTable();
@@ -31,9 +31,6 @@ namespace register_login
             }
         }
 
-        private void Form3_Load(object sender, EventArgs e)
-        {
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -45,27 +42,23 @@ namespace register_login
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            string userName = textBox1.Text.Trim(); 
-            string password = textBox2.Text.Trim(); 
-
-
+            string userName = textBox1.Text.Trim();
+            string password = textBox2.Text.Trim();
 
             string connection = "server=localhost;database=user;username=root;password=;";
 
-            using (MySqlConnection conn = new MySqlConnection(connection))
+            MySqlConnection conn = new MySqlConnection(connection);
             {
                 conn.Open();
 
                 string sql = "INSERT INTO man (userName, password) VALUES (@userName, @password)";
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 {
                     cmd.Parameters.AddWithValue("@userName", userName);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.ExecuteNonQuery();
-
                     MessageBox.Show("User added successfully.");
-
                     LoadData();
                 }
             }
@@ -73,6 +66,32 @@ namespace register_login
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void deletebtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int userId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                    string connection = "server=localhost;database=user;username=root;password=;";
+                    MySqlConnection mySqlConnection = new MySqlConnection(connection);
+                    {
+                        mySqlConnection.Open();
+                        string sql = "DELETE FROM man WHERE id = @id";
+                        MySqlCommand db = new MySqlCommand(sql, mySqlConnection);
+                        db.Parameters.AddWithValue("@id", userId);
+                        db.ExecuteNonQuery();
+                        MessageBox.Show("User deleted successfully");
+                        LoadData();
+                    }
+                }
+                else { MessageBox.Show("Select user which u want to delete"); }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
