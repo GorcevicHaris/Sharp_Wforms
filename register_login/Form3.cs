@@ -103,8 +103,10 @@ namespace register_login
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     string userName = textBox1.Text;
-                    string password = textBox2.Text;
-                    int userId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                    string password = textBox2.Text; 
+                    dataGridView1.CurrentRow.Cells["userName"].Value = userName;
+                    dataGridView1.CurrentRow.Cells["password"].Value = password;
+                    int userId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id"].Value);
 
                     string connection = "server=localhost;database=user;username=root;password=;";
                     using (MySqlConnection mySqlConnection = new MySqlConnection(connection))
@@ -121,7 +123,9 @@ namespace register_login
                         }
                     }
 
-                    LoadData();
+                
+
+                    LoadData(); // Učitaj podatke ponovo
                     MessageBox.Show("User is successfully updated");
                 }
                 else
@@ -133,6 +137,7 @@ namespace register_login
             {
                 MessageBox.Show(ex.Message);
             }
+
 
         }
     }
