@@ -1,9 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
-using System.Data.Common;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace register_login
 {
@@ -17,51 +15,64 @@ namespace register_login
 
         private void LoadData()
         {
+            string connection = "server=localhost;database=user;username=root;password=;";
 
+            using (MySqlConnection conn = new MySqlConnection(connection))
+            {
+                conn.Open();
+                string sql = "SELECT userName, password FROM man";
+                using (MySqlCommand db = new MySqlCommand(sql, conn))
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(db);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+            string userName = textBox1.Text.Trim(); 
+            string password = textBox2.Text.Trim(); 
+
+
 
             string connection = "server=localhost;database=user;username=root;password=;";
 
             using (MySqlConnection conn = new MySqlConnection(connection))
             {
                 conn.Open();
-                string sql = "SELECT * FROM man";
-                using (MySqlCommand db = new MySqlCommand(sql, conn))
+
+                string sql = "INSERT INTO man (userName, password) VALUES (@userName, @password)";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(db);
+                    cmd.Parameters.AddWithValue("@userName", userName);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.ExecuteNonQuery();
 
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    MessageBox.Show("User added successfully.");
 
-                    //Label[] array = new Label[dt.Rows.Count];
-
-                    //int leftPosition = 20;
-                    //for (int i = 0; i < dt.Rows.Count; i++)
-                    //{
-                    //    array[i] = new Label();
-                    //    array[i].Text = dt.Rows[i]["userName"].ToString();
-                    //    array[i].Left = leftPosition;
-                    //    array[i].Top = 30 * i;
-                    //    leftPosition += array[i].Width + 10; 
-                    //    this.Controls.Add(array[i]);
-                    //}
-
+                    LoadData();
                 }
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
