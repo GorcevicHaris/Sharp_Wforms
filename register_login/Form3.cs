@@ -11,6 +11,7 @@ namespace register_login
         {
             InitializeComponent();
             LoadData();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
 
         private void LoadData()
@@ -20,7 +21,7 @@ namespace register_login
             MySqlConnection conn = new MySqlConnection(connection);
             {
                 conn.Open();
-                string sql = "SELECT * FROM man"; // Include the 'id' column
+                string sql = "SELECT * FROM man";
                 MySqlCommand db = new MySqlCommand(sql, conn);
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(db);
@@ -31,6 +32,15 @@ namespace register_login
             }
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedRows = dataGridView1.SelectedRows;
+                textBox2.Text = selectedRows[0].Cells["userName"].Value.ToString();
+                textBox1.Text = selectedRows[0].Cells["password"].Value.ToString();
+            }
+        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -42,22 +52,24 @@ namespace register_login
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            string userName = textBox1.Text.Trim();
-            string password = textBox2.Text.Trim();
+            int roomNumber = Convert.ToInt32(textBox3.Text);
+            string userName = textBox2.Text.Trim();
+            string password = textBox1.Text.Trim();
 
             string connection = "server=localhost;database=user;username=root;password=;";
 
             MySqlConnection conn = new MySqlConnection(connection);
             {
                 conn.Open();
+                 
+                string sql = "INSERT INTO man (userName, password,roomNum) VALUES (@userName, @password,@roomNum)";
 
-                string sql = "INSERT INTO man (userName, password) VALUES (@userName, @password)";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlCommand db = new MySqlCommand(sql, conn);
                 {
-                    cmd.Parameters.AddWithValue("@userName", userName);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.ExecuteNonQuery();
+                    db.Parameters.AddWithValue("@userName", userName);
+                    db.Parameters.AddWithValue("@password", password);
+                    db.Parameters.AddWithValue("@roomNum", roomNumber);
+                    db.ExecuteNonQuery();
                     MessageBox.Show("User added successfully.");
                     LoadData();
                 }
@@ -87,7 +99,10 @@ namespace register_login
                         LoadData();
                     }
                 }
-                else { MessageBox.Show("Select user which u want to delete"); }
+                else
+                {
+                    MessageBox.Show("Select user which u want to delete");
+                }
 
             }
             catch (Exception ex)
@@ -102,30 +117,30 @@ namespace register_login
             {
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    string userName = textBox1.Text;
-                    string password = textBox2.Text; 
+                    int roomNum = Convert.ToInt32(textBox3.Text);
+                    string userName = textBox2.Text;
+                    string password = textBox1.Text; 
                     dataGridView1.CurrentRow.Cells["userName"].Value = userName;
                     dataGridView1.CurrentRow.Cells["password"].Value = password;
+                    dataGridView1.CurrentRow.Cells["roomNum"].Value = roomNum;
                     int userId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id"].Value);
 
                     string connection = "server=localhost;database=user;username=root;password=;";
                     using (MySqlConnection mySqlConnection = new MySqlConnection(connection))
                     {
                         mySqlConnection.Open();
-                        string sql = "UPDATE man SET userName = @userName, password = @password WHERE id = @userID";
+                        string sql = "UPDATE man SET userName = @userName, password = @password, roomNum = @roomNum WHERE id = @userID";
                         using (MySqlCommand db = new MySqlCommand(sql, mySqlConnection))
                         {
                             db.Parameters.AddWithValue("@userName", userName);
                             db.Parameters.AddWithValue("@password", password);
+                            db.Parameters.AddWithValue("@roomNum", roomNum);
                             db.Parameters.AddWithValue("@userID", userId);
-
                             db.ExecuteNonQuery();
                         }
                     }
 
-                
-
-                    LoadData(); // Učitaj podatke ponovo
+                    LoadData(); 
                     MessageBox.Show("User is successfully updated");
                 }
                 else
@@ -137,8 +152,6 @@ namespace register_login
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
     }
 }

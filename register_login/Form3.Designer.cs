@@ -44,6 +44,8 @@
             textBox2 = new TextBox();
             label4 = new Label();
             label5 = new Label();
+            textBox3 = new TextBox();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -120,7 +122,7 @@
             // 
             // addbtn
             // 
-            addbtn.Location = new Point(464, 62);
+            addbtn.Location = new Point(469, 25);
             addbtn.Name = "addbtn";
             addbtn.Size = new Size(75, 23);
             addbtn.TabIndex = 6;
@@ -130,7 +132,7 @@
             // 
             // deletebtn
             // 
-            deletebtn.Location = new Point(545, 62);
+            deletebtn.Location = new Point(550, 25);
             deletebtn.Name = "deletebtn";
             deletebtn.Size = new Size(75, 23);
             deletebtn.TabIndex = 7;
@@ -140,7 +142,7 @@
             // 
             // editbtn
             // 
-            editbtn.Location = new Point(464, 100);
+            editbtn.Location = new Point(469, 63);
             editbtn.Name = "editbtn";
             editbtn.Size = new Size(75, 23);
             editbtn.TabIndex = 8;
@@ -151,7 +153,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(339, 107);
+            textBox1.Location = new Point(344, 70);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 9;
@@ -159,7 +161,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(339, 63);
+            textBox2.Location = new Point(344, 26);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 10;
@@ -167,7 +169,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(339, 91);
+            label4.Location = new Point(344, 9);
             label4.Name = "label4";
             label4.Size = new Size(27, 15);
             label4.TabIndex = 11;
@@ -176,17 +178,35 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(339, 45);
+            label5.Location = new Point(344, 52);
             label5.Name = "label5";
             label5.Size = new Size(29, 15);
             label5.TabIndex = 12;
             label5.Text = "sifra";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(344, 121);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(100, 23);
+            textBox3.TabIndex = 13;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(344, 103);
+            label6.Name = "label6";
+            label6.Size = new Size(63, 15);
+            label6.TabIndex = 14;
+            label6.Text = "roomNum";
             // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label6);
+            Controls.Add(textBox3);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(textBox2);
@@ -227,5 +247,7 @@
         private TextBox textBox2;
         private Label label4;
         private Label label5;
+        private TextBox textBox3;
+        private Label label6;
     }
 }
