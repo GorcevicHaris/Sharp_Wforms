@@ -52,27 +52,56 @@ namespace register_login
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            int roomNumber = Convert.ToInt32(textBox3.Text);
+            int roomNumber;
             string userName = textBox2.Text.Trim();
             string password = textBox1.Text.Trim();
-
+            if (!int.TryParse(textBox3.Text , out roomNumber))
+            {
+                MessageBox.Show("Unesite broj");
+                return;
+            }
             string connection = "server=localhost;database=user;username=root;password=;";
 
             MySqlConnection conn = new MySqlConnection(connection);
+            try
             {
                 conn.Open();
-                 
-                string sql = "INSERT INTO man (userName, password,roomNum) VALUES (@userName, @password,@roomNum)";
 
-                MySqlCommand db = new MySqlCommand(sql, conn);
+                string Selectsql = "SELECT roomNum FROM man WHERE roomNum = @roomNum";
+                MySqlCommand dbQ = new MySqlCommand(Selectsql, conn);
+                dbQ.Parameters.AddWithValue("@roomNum", roomNumber);
+
+                using (var reader = dbQ.ExecuteReader())
                 {
-                    db.Parameters.AddWithValue("@userName", userName);
-                    db.Parameters.AddWithValue("@password", password);
-                    db.Parameters.AddWithValue("@roomNum", roomNumber);
-                    db.ExecuteNonQuery();
-                    MessageBox.Show("User added successfully.");
-                    LoadData();
+                    if (reader.Read())
+                    {
+                        int existingRoomNumber = Convert.ToInt32(reader["roomNum"]);
+                        if (existingRoomNumber == roomNumber)
+                        {
+
+                            MessageBox.Show("Soba sa tim brojem već postoji." + reader);
+                            return;
+                        }
+                    }
                 }
+              
+
+                string sql = "INSERT INTO man (userName, password, roomNum) VALUES (@userName, @password, @roomNum)";
+                MySqlCommand db = new MySqlCommand(sql, conn);
+                db.Parameters.AddWithValue("@userName", userName);
+                db.Parameters.AddWithValue("@password", password);
+                db.Parameters.AddWithValue("@roomNum", roomNumber);
+                db.ExecuteNonQuery();
+                MessageBox.Show("Korisnik uspešno dodat.");
+                LoadData(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri unosu korisnika: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -84,7 +113,7 @@ namespace register_login
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                if (dataGridView1.SelectedRows.Count > 0 )
                 {
                     int userId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                     string connection = "server=localhost;database=user;username=root;password=;";
@@ -115,7 +144,7 @@ namespace register_login
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                if (dataGridView1.SelectedRows.Count > 0 )
                 {
                     int roomNum = Convert.ToInt32(textBox3.Text);
                     string userName = textBox2.Text;
