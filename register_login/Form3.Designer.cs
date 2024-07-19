@@ -46,6 +46,7 @@
             label5 = new Label();
             textBox3 = new TextBox();
             label6 = new Label();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -200,11 +201,21 @@
             label6.TabIndex = 14;
             label6.Text = "roomNum";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(592, 71);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 15;
+            label7.Text = "label7";
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(textBox3);
             Controls.Add(label5);
@@ -249,5 +260,6 @@
         private Label label5;
         private TextBox textBox3;
         private Label label6;
+        private Label label7;
     }
 }

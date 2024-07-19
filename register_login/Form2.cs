@@ -40,7 +40,8 @@ namespace register_login
                     if (reader.HasRows)
                     {
                         MessageBox.Show("success");
-                        Form3 form = new Form3();
+                        Form3 form = new Form3(name);   
+                        //prenosimo name u formu 3
                         form.Show();
                         this.Hide();
 
@@ -53,7 +54,7 @@ namespace register_login
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show(ex.Message.ToString());
                 }
 

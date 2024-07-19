@@ -2,17 +2,54 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace register_login
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        private string currentUserName;
+        public Form3(string userName)
         {
             InitializeComponent();
+            label7.Text = userName;
+            //label7.Text = currentUserName;
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            //NameOfUser();
         }
+
+        //private void NameOfUser()
+        //{
+        //    string connection = "server=localhost;database=user;username=root;password=;";
+        //    MySqlConnection conn = new MySqlConnection(connection);
+        //    try
+        //    {
+        //        conn.Open();
+        //        string sql = "SELECT userName FROM man WHERE userName = @userName";
+        //        MySqlCommand db = new MySqlCommand(sql, conn);
+        //        db.Parameters.AddWithValue("@userName", currentUserName);
+
+        //        MySqlDataReader reader = db.ExecuteReader();
+        //        if (reader.Read())
+        //        {
+        //            label7.Text = currentUserName;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("User not found");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("An error occurred: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
+
 
         private void LoadData()
         {
@@ -55,7 +92,7 @@ namespace register_login
             int roomNumber;
             string userName = textBox2.Text.Trim();
             string password = textBox1.Text.Trim();
-            if (!int.TryParse(textBox3.Text , out roomNumber))
+            if (!int.TryParse(textBox3.Text, out roomNumber))
             {
                 MessageBox.Show("Unesite broj");
                 return;
@@ -84,7 +121,7 @@ namespace register_login
                         }
                     }
                 }
-              
+
 
                 string sql = "INSERT INTO man (userName, password, roomNum) VALUES (@userName, @password, @roomNum)";
                 MySqlCommand db = new MySqlCommand(sql, conn);
@@ -93,7 +130,7 @@ namespace register_login
                 db.Parameters.AddWithValue("@roomNum", roomNumber);
                 db.ExecuteNonQuery();
                 MessageBox.Show("Korisnik uspešno dodat.");
-                LoadData(); 
+                LoadData();
             }
             catch (Exception ex)
             {
@@ -113,7 +150,7 @@ namespace register_login
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0 )
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
                     int userId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                     string connection = "server=localhost;database=user;username=root;password=;";
@@ -144,11 +181,11 @@ namespace register_login
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0 )
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
                     int roomNum = Convert.ToInt32(textBox3.Text);
                     string userName = textBox2.Text;
-                    string password = textBox1.Text; 
+                    string password = textBox1.Text;
                     dataGridView1.CurrentRow.Cells["userName"].Value = userName;
                     dataGridView1.CurrentRow.Cells["password"].Value = password;
                     dataGridView1.CurrentRow.Cells["roomNum"].Value = roomNum;
@@ -169,7 +206,7 @@ namespace register_login
                         }
                     }
 
-                    LoadData(); 
+                    LoadData();
                     MessageBox.Show("User is successfully updated");
                 }
                 else
