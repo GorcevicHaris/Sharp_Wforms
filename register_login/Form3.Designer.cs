@@ -31,11 +31,7 @@
             label1 = new Label();
             nameCell = new DataGridViewTextBoxColumn();
             passwordCell = new DataGridViewTextBoxColumn();
-            label2 = new Label();
-            label3 = new Label();
             dataGridView1 = new DataGridView();
-            groupBox1 = new GroupBox();
-            listBox1 = new ListBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             addbtn = new Button();
             deletebtn = new Button();
@@ -47,8 +43,8 @@
             textBox3 = new TextBox();
             label6 = new Label();
             label7 = new Label();
+            LogoutBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -70,24 +66,6 @@
             passwordCell.HeaderText = "Sifra";
             passwordCell.Name = "passwordCell";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(6, 28);
-            label2.Name = "label2";
-            label2.Size = new Size(27, 15);
-            label2.TabIndex = 1;
-            label2.Text = "ime";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(124, 153);
-            label3.Name = "label3";
-            label3.Size = new Size(29, 15);
-            label3.TabIndex = 2;
-            label3.Text = "sifra";
-            // 
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
@@ -100,26 +78,6 @@
             dataGridView1.Size = new Size(804, 289);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(label2);
-            groupBox1.Location = new Point(-3, 6);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 100);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
-            groupBox1.Enter += groupBox1_Enter;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(681, 34);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 94);
-            listBox1.TabIndex = 5;
             // 
             // addbtn
             // 
@@ -210,11 +168,25 @@
             label7.TabIndex = 15;
             label7.Text = "label7";
             // 
+            // LogoutBtn
+            // 
+            LogoutBtn.AllowDrop = true;
+            LogoutBtn.BackColor = Color.Red;
+            LogoutBtn.ForeColor = SystemColors.ControlLight;
+            LogoutBtn.Location = new Point(-3, 151);
+            LogoutBtn.Name = "LogoutBtn";
+            LogoutBtn.Size = new Size(75, 23);
+            LogoutBtn.TabIndex = 16;
+            LogoutBtn.Text = "logout";
+            LogoutBtn.UseVisualStyleBackColor = false;
+            LogoutBtn.Click += LogoutBtn_Click;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(LogoutBtn);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(textBox3);
@@ -225,16 +197,11 @@
             Controls.Add(editbtn);
             Controls.Add(deletebtn);
             Controls.Add(addbtn);
-            Controls.Add(listBox1);
-            Controls.Add(groupBox1);
             Controls.Add(dataGridView1);
-            Controls.Add(label3);
             Controls.Add(label1);
             Name = "Form3";
             Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,11 +212,7 @@
         private DataGridView tabela;
         private DataGridViewTextBoxColumn nameCell;
         private DataGridViewTextBoxColumn passwordCell;
-        private Label label2;
-        private Label label3;
         private DataGridView dataGridView1;
-        private GroupBox groupBox1;
-        private ListBox listBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button addbtn;
         private Button deletebtn;
@@ -261,5 +224,6 @@
         private TextBox textBox3;
         private Label label6;
         private Label label7;
+        private Button LogoutBtn;
     }
 }
