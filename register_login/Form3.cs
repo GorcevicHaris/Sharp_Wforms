@@ -19,7 +19,6 @@ namespace register_login
             label7.Text = userName;
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-            SetupDataGridView();
         }
         MySqlConnection connection = new MySqlConnection("server=localhost;database=user;username=root;password=;");
 
@@ -40,27 +39,16 @@ namespace register_login
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
                     dataGridView1.DataSource = dataTable;
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.RowTemplate.Height = 60;
+                    DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
+                    imgCol = (DataGridViewImageColumn)dataGridView1.Columns[5];
+                    imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
+
                 }
             }
         }
-        private void SetupDataGridView()
-        {
-            // Primer dodavanja kolone za slike
-            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            imageColumn.Name = "imageColumn";
-            imageColumn.HeaderText = "Image";
-            dataGridView1.Columns.Add(imageColumn);
-
-            // Postavljanje širine kolona
-            dataGridView1.Columns["imageColumn"].Width = 150;
-
-            // Postavljanje visine redova
-            dataGridView1.RowTemplate.Height = 60;
-
-            // Automatsko podešavanje širine kolona prema sadržaju
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-        }
-
+   
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
