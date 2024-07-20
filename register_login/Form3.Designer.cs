@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             nameCell = new DataGridViewTextBoxColumn();
             passwordCell = new DataGridViewTextBoxColumn();
@@ -44,7 +45,11 @@
             label6 = new Label();
             label7 = new Label();
             LogoutBtn = new Button();
+            GoToForm4 = new Button();
+            pictureBox1 = new PictureBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -71,7 +76,7 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.Location = new Point(-3, 180);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -181,11 +186,36 @@
             LogoutBtn.UseVisualStyleBackColor = false;
             LogoutBtn.Click += LogoutBtn_Click;
             // 
+            // GoToForm4
+            // 
+            GoToForm4.Location = new Point(0, 0);
+            GoToForm4.Name = "GoToForm4";
+            GoToForm4.Size = new Size(75, 23);
+            GoToForm4.TabIndex = 17;
+            GoToForm4.Text = "gotoform4";
+            GoToForm4.UseVisualStyleBackColor = true;
+            GoToForm4.Click += GoToForm4_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(450, 92);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(124, 82);
+            pictureBox1.TabIndex = 18;
+            pictureBox1.TabStop = false;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
+            Controls.Add(GoToForm4);
             Controls.Add(LogoutBtn);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -202,6 +232,7 @@
             Name = "Form3";
             Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -209,7 +240,6 @@
         #endregion
 
         private Label label1;
-        private DataGridView tabela;
         private DataGridViewTextBoxColumn nameCell;
         private DataGridViewTextBoxColumn passwordCell;
         private DataGridView dataGridView1;
@@ -225,5 +255,8 @@
         private Label label6;
         private Label label7;
         private Button LogoutBtn;
+        private Button GoToForm4;
+        private PictureBox pictureBox1;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }

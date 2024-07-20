@@ -3,53 +3,28 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Drawing;
+using System.IO;
+using System.Net;
 
 namespace register_login
 {
     public partial class Form3 : Form
     {
-        private string currentUserName;
+
         public Form3(string userName)
         {
-            InitializeComponent();
+
+        InitializeComponent();
             label7.Text = userName;
-            //label7.Text = currentUserName;
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-            //NameOfUser();
+            SetupDataGridView();
         }
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=user;username=root;password=;");
 
-        //private void NameOfUser()
-        //{
-        //    string connection = "server=localhost;database=user;username=root;password=;";
-        //    MySqlConnection conn = new MySqlConnection(connection);
-        //    try
-        //    {
-        //        conn.Open();
-        //        string sql = "SELECT userName FROM man WHERE userName = @userName";
-        //        MySqlCommand db = new MySqlCommand(sql, conn);
-        //        db.Parameters.AddWithValue("@userName", currentUserName);
-
-        //        MySqlDataReader reader = db.ExecuteReader();
-        //        if (reader.Read())
-        //        {
-        //            label7.Text = currentUserName;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("User not found");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("An error occurred: " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //}
-
+      
+      
 
         private void LoadData()
         {
@@ -67,6 +42,23 @@ namespace register_login
                     dataGridView1.DataSource = dataTable;
                 }
             }
+        }
+        private void SetupDataGridView()
+        {
+            // Primer dodavanja kolone za slike
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.Name = "imageColumn";
+            imageColumn.HeaderText = "Image";
+            dataGridView1.Columns.Add(imageColumn);
+
+            // Postavljanje širine kolona
+            dataGridView1.Columns["imageColumn"].Width = 150;
+
+            // Postavljanje visine redova
+            dataGridView1.RowTemplate.Height = 60;
+
+            // Automatsko podešavanje širine kolona prema sadržaju
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -228,6 +220,11 @@ namespace register_login
 
         }
 
-        
+        private void GoToForm4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
     }
 }
