@@ -48,6 +48,7 @@
             GoToForm4 = new Button();
             pictureBox1 = new PictureBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -77,10 +78,10 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.Location = new Point(-3, 180);
+            dataGridView1.Location = new Point(-3, 216);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(1003, 314);
+            dataGridView1.Size = new Size(1003, 278);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -178,7 +179,7 @@
             LogoutBtn.AllowDrop = true;
             LogoutBtn.BackColor = Color.Red;
             LogoutBtn.ForeColor = SystemColors.ControlLight;
-            LogoutBtn.Location = new Point(-3, 151);
+            LogoutBtn.Location = new Point(12, 187);
             LogoutBtn.Name = "LogoutBtn";
             LogoutBtn.Size = new Size(75, 23);
             LogoutBtn.TabIndex = 16;
@@ -198,7 +199,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(713, 36);
+            pictureBox1.Location = new Point(711, 25);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(263, 138);
             pictureBox1.TabIndex = 18;
@@ -209,11 +210,25 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.HotTrack;
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(801, 169);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 19;
+            button1.TabStop = false;
+            button1.Text = "Add Photo";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 494);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(GoToForm4);
             Controls.Add(LogoutBtn);
@@ -258,5 +273,6 @@
         private Button GoToForm4;
         private PictureBox pictureBox1;
         private ContextMenuStrip contextMenuStrip1;
+        private Button button1;
     }
 }

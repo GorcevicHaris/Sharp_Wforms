@@ -15,15 +15,15 @@ namespace register_login
         public Form3(string userName)
         {
 
-        InitializeComponent();
+            InitializeComponent();
             label7.Text = userName;
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
-        MySqlConnection connection = new MySqlConnection("server=localhost;database=user;username=root;password=;");
+        //MySqlConnection connection = new MySqlConnection("server=localhost;database=user;username=root;password=;");
 
-      
-      
+
+
 
         private void LoadData()
         {
@@ -48,7 +48,7 @@ namespace register_login
                 }
             }
         }
-   
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -61,8 +61,6 @@ namespace register_login
                 MemoryStream ms = new MemoryStream(img);
                 pictureBox1.Image = Image.FromStream(ms);
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-
             }
         }
 
@@ -79,6 +77,10 @@ namespace register_login
             int roomNumber;
             string userName = textBox2.Text.Trim();
             string password = textBox1.Text.Trim();
+            MemoryStream ms = new MemoryStream();
+            pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            //cuvamo sliku u niz bajtova mora tako
             if (!int.TryParse(textBox3.Text, out roomNumber))
             {
                 MessageBox.Show("Unesite broj");
@@ -108,13 +110,13 @@ namespace register_login
                         }
                     }
                 }
-
-
-                string sql = "INSERT INTO man (userName, password, roomNum) VALUES (@userName, @password, @roomNum)";
+                string sql = "INSERT INTO man (userName, password, roomNum,IMG) VALUES (@userName, @password, @roomNum, @img)";
                 MySqlCommand db = new MySqlCommand(sql, conn);
                 db.Parameters.AddWithValue("@userName", userName);
                 db.Parameters.AddWithValue("@password", password);
                 db.Parameters.AddWithValue("@roomNum", roomNumber);
+                db.Parameters.AddWithValue("@img", img);
+
                 db.ExecuteNonQuery();
                 MessageBox.Show("Korisnik uspešno dodat.");
                 LoadData();
@@ -220,6 +222,17 @@ namespace register_login
             this.Hide();
             Form4 form4 = new Form4();
             form4.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.Filter = "Chose Image(*.JPG;*.PNG;*GIF;)|*.jpg;*.png;*.gif";
+
+            if (opf.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = Image.FromFile(opf.FileName);
+            }
         }
     }
 }
