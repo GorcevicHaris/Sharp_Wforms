@@ -54,8 +54,15 @@ namespace register_login
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var selectedRows = dataGridView1.SelectedRows;
-                textBox2.Text = selectedRows[0].Cells["userName"].Value.ToString();
                 textBox1.Text = selectedRows[0].Cells["password"].Value.ToString();
+                textBox2.Text = selectedRows[0].Cells["userName"].Value.ToString();
+                textBox3.Text = selectedRows[0].Cells["roomNum"].Value.ToString();
+                Byte[] img = (Byte[])dataGridView1.CurrentRow.Cells[5].Value;
+                MemoryStream ms = new MemoryStream(img);
+                pictureBox1.Image = Image.FromStream(ms);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+
             }
         }
 

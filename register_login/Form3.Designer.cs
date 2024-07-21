@@ -80,7 +80,7 @@
             dataGridView1.Location = new Point(-3, 180);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(804, 289);
+            dataGridView1.Size = new Size(1003, 314);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -198,9 +198,9 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(450, 92);
+            pictureBox1.Location = new Point(713, 36);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(124, 82);
+            pictureBox1.Size = new Size(263, 138);
             pictureBox1.TabIndex = 18;
             pictureBox1.TabStop = false;
             // 
@@ -213,7 +213,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(999, 494);
             Controls.Add(pictureBox1);
             Controls.Add(GoToForm4);
             Controls.Add(LogoutBtn);
