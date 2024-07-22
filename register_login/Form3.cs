@@ -179,22 +179,25 @@ namespace register_login
                     dataGridView1.CurrentRow.Cells["password"].Value = password;
                     dataGridView1.CurrentRow.Cells["roomNum"].Value = roomNum;
                     int userId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id"].Value);
+                    MemoryStream ms = new MemoryStream();
+                    pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
+                    byte[] img = ms.ToArray();
 
                     string connection = "server=localhost;database=user;username=root;password=;";
                     using (MySqlConnection mySqlConnection = new MySqlConnection(connection))
                     {
                         mySqlConnection.Open();
-                        string sql = "UPDATE man SET userName = @userName, password = @password, roomNum = @roomNum WHERE id = @userID";
+                        string sql = "UPDATE man SET userName = @userName, password = @password, roomNum = @roomNum, IMG = @img WHERE id = @userID";
                         using (MySqlCommand db = new MySqlCommand(sql, mySqlConnection))
                         {
                             db.Parameters.AddWithValue("@userName", userName);
                             db.Parameters.AddWithValue("@password", password);
                             db.Parameters.AddWithValue("@roomNum", roomNum);
                             db.Parameters.AddWithValue("@userID", userId);
+                            db.Parameters.AddWithValue("@IMG", img);
                             db.ExecuteNonQuery();
                         }
                     }
-
                     LoadData();
                     MessageBox.Show("User is successfully updated");
                 }
@@ -223,7 +226,7 @@ namespace register_login
             Form4 form4 = new Form4();
             form4.Show();
         }
-
+          
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog opf = new OpenFileDialog();
